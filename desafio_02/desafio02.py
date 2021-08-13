@@ -73,9 +73,7 @@ def adivinhe_o_pokemon():
 
     pokemon_aleatorio = random.choice(lista_nome_pokemon)
 
-    contador = 1
-    acerto = 0
-    input_pokemon = ''
+    contador, acerto, input_pokemon = 1, 0, ''
     while contador < len(pokemon_aleatorio) or acerto == 0:
         if input_pokemon == pokemon_aleatorio:
             print(f'Acertou! Pokemon: {pokemon_aleatorio}')
