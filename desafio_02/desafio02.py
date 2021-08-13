@@ -1,4 +1,5 @@
 import random
+import json
 
 
 def piramide_vertical(nome):
@@ -57,4 +58,34 @@ def descubra_a_palavra():
             break
 
 
-descubra_a_palavra()
+def adivinhe_o_pokemon():
+    '''Esta função lê um arquivo JSON de pokemons e escolhe um aleatoriamente
+        Logo, o jogador deve digitar o nome do pokemon, se errar é revelado
+        uma letra, se acertar vence!
+    '''
+    with open('./desafio_02/pokemons.json') as file:
+        content = file.read()
+        pokemons = json.loads(content)['results']
+
+    lista_nome_pokemon = []
+    for pokemon in pokemons:
+        lista_nome_pokemon.append(pokemon['name'])
+
+    pokemon_aleatorio = random.choice(lista_nome_pokemon)
+
+    contador = 1
+    acerto = 0
+    input_pokemon = ''
+    while contador < len(pokemon_aleatorio) or acerto == 0:
+        if input_pokemon == pokemon_aleatorio:
+            print(f'Acertou! Pokemon: {pokemon_aleatorio}')
+            acerto += 1
+            break
+        else:
+            input_pokemon = input('Adivinhe o pokemon: ')
+            print(f'{pokemon_aleatorio[:contador]}')
+            contador += 1
+
+        if contador - 1 == len(pokemon_aleatorio):
+            print(f'Você perdeu! Pokemon: {pokemon_aleatorio}')
+            break
